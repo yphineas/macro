@@ -1,0 +1,25 @@
+{
+  "stopKey": "F9",
+  "steps": [
+    {
+      "action": "click_image",
+      "image": "imgs/play.png",
+      "confidence": 0.8
+    },
+    {
+      "action": "typewrite",
+      "text": "Olá Mundo!",
+      "interval": 0.1
+    },
+    {
+      "action": "move",
+      "x": 500,
+      "y": 300,
+      "duration": 1
+    },
+    {
+      "action": "hotkey",
+      "keys": ["ctrl", "s"]
+    }
+  ]
+}

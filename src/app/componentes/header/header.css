@@ -1,0 +1,29 @@
+.areaTitle {
+  display: flex;
+  height: 10vh;
+  padding: 15px 30px;
+  justify-content: space-between;
+  border-bottom: solid 1px;
+  border-color: rgb(0, 255, 136);
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.titlePrim {
+  font-size: 20px;
+  color: rgb(0, 255, 136);
+}
+
+.titleSec {
+  font-size: 14px;
+  color: rgb(2, 178, 222);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+}

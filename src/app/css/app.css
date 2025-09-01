@@ -1,0 +1,71 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body, h1, h3 {
+  font-family: "Courier New", monospace;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+.container {
+  background-color: rgb(16, 16, 16);
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+.content {
+  flex: 1;
+}
+
+
+
+/* ---------------------------------- */
+
+.areaBody{
+  display: flex;
+  width: 100vw;
+  justify-content: center;
+}
+
+.log{
+  display: flex;
+  justify-content: space-between;
+  height: 20%;
+  margin: 20px;
+  min-width: 50%;
+  min-height: 70vh;
+  border: solid 1px;
+  border-radius: 20px;
+  border-color: rgb(0, 255, 136);
+}
+
+.titleLog{
+  width: 100%;
+  height: 15%;
+  padding: 20px;
+  display: flex;
+  border-bottom: solid 1px;
+  padding-bottom: 10px;
+  justify-content: space-between;
+  font-size: 14px;
+  color: rgb(0, 255, 136);
+}
+
+.areaConfig{
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+}
+
+.config{
+  margin: 20px;
+  padding: 20px;
+  height: 50%;
+  border-radius: 20px;
+  border: solid 1px;
+  border-color: rgb(0, 255, 136);
+}

@@ -1,0 +1,17 @@
+# dependências
+node_modules/
+venv/
+
+# builds
+dist/
+
+# cache e logs
+*.log
+.cache/
+
+# configs locais
+.env
+.vscode/
+.idea/
+
+node_modules
