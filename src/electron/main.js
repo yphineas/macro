@@ -11,14 +11,17 @@ let mainWindow;
 let pythonProcess;
 
 const DATA_FILE = path.join(__dirname, "image/imagens.json");
-pythonProcess = spawn("python", [path.join(__dirname, "../pyMacro/main.py")]);
+
+const pythonPath = path.join(__dirname, "../../venv/scripts/python.exe");
+const scriptPath = path.join(__dirname, "../pyMacro/main.py");
+pythonProcess = spawn(pythonPath, [scriptPath]);
 
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     webPreferences: {
-      nodeIntegration: true, // permite usar require() no index.html
+      nodeIntegration: true, 
       contextIsolation: false,
     },
   });
@@ -28,14 +31,19 @@ function createWindow() {
   mainWindow.loadURL(devUrl);
   mainWindow.webContents.openDevTools();
 
-  // Inicia o script Python
+
+
+
 
   // Recebe stdout do Python
   pythonProcess.stdout.on("data", (data) => {
-    const msg = data.toString().trim();
-    console.log("📥 Python:", msg);
-    if (mainWindow) {
-      mainWindow.webContents.send("fromPython", { msg });
+    const message = data.toString().trim();
+    console.log("[electron] 📥 Python:", message);
+    try {
+      const json = JSON.parse(message);
+      mainWindow.webContents.send("python-message", json); 
+    } catch {
+      mainWindow.webContents.send("python-message", { raw: message });
     }
   });
 
@@ -94,9 +102,9 @@ ipcMain.handle("ler-imagens", () => {
   return lerImagens();
 });
 
-// Evento do botão -> envia para Python
+// Enviar comando para Python
 ipcMain.on("toPython", (event, arg) => {
-  console.log("📤 Recebi do renderer:", arg);
+  console.log("📤 Enviando para Python:", arg);
   if (pythonProcess) {
     pythonProcess.stdin.write(JSON.stringify(arg) + "\n");
   }
@@ -105,5 +113,6 @@ ipcMain.on("toPython", (event, arg) => {
 app.whenReady().then(createWindow);
 
 app.on("window-all-closed", () => {
+  if (pythonProcess) pythonProcess.kill();
   if (process.platform !== "darwin") app.quit();
 });

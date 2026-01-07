@@ -1,6 +1,7 @@
 .areaTitle {
   display: flex;
   height: 10vh;
+  min-height: 80px;
   padding: 15px 30px;
   justify-content: space-between;
   border-bottom: solid 1px;

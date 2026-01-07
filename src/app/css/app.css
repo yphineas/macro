@@ -8,13 +8,19 @@ body, h1, h3 {
   margin: 0;
   padding: 0;
   height: 100vh;
+  background-color: rgb(16, 16, 16);
 }
 
 .container {
   background-color: rgb(16, 16, 16);
   width: 100vw;
   height: 100vh;
+  min-height: 700px;
   display: flex;
+}
+
+.area{
+  min-height: 600px;
 }
 
 .content {
@@ -24,24 +30,6 @@ body, h1, h3 {
 
 
 /* ---------------------------------- */
-
-.areaBody{
-  display: flex;
-  width: 100vw;
-  justify-content: center;
-}
-
-.log{
-  display: flex;
-  justify-content: space-between;
-  height: 20%;
-  margin: 20px;
-  min-width: 50%;
-  min-height: 70vh;
-  border: solid 1px;
-  border-radius: 20px;
-  border-color: rgb(0, 255, 136);
-}
 
 .titleLog{
   width: 100%;
@@ -53,19 +41,4 @@ body, h1, h3 {
   justify-content: space-between;
   font-size: 14px;
   color: rgb(0, 255, 136);
-}
-
-.areaConfig{
-    display: flex;
-    flex-direction: column;
-    min-width: 250px;
-}
-
-.config{
-  margin: 20px;
-  padding: 20px;
-  height: 50%;
-  border-radius: 20px;
-  border: solid 1px;
-  border-color: rgb(0, 255, 136);
 }

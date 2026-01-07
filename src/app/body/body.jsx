@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./body.css";
-import Button from "../button/button";
+import Button from "../componentes/button/button";
 
 let ipcRenderer = window.require("electron").ipcRenderer;
 
@@ -19,8 +19,13 @@ function Body() {
   }
 
   const enviar = () => {
-    ipcRenderer.send("toPython", { msg: "Teste" });
-    setLogs(prev => [...prev, "📤 Inicializando..."]);
+    ipcRenderer.send("toPython", { action: "start" });
+    setLogs((prev) => [...prev, "📤 Inicializando..."]);
+  };
+
+  const para = () => {
+    ipcRenderer.send("toPython", { action: "stop" });
+    setLogs((prev) => [...prev, "📤 Parando..."]);
   };
 
   useEffect(() => {
@@ -28,17 +33,20 @@ function Body() {
     ipcRenderer.invoke("ler-imagens").then(setImagens);
 
     ipcRenderer.invoke("fromPython", (event, data) => {
-      setLogs(prev => [...prev, JSON.stringify(data)]);
+      setLogs((prev) => [...prev, JSON.stringify(data)]);
+    });
+    
+    ipcRenderer.on("python-message", (_, msg) => {
+      setLog((prev) => [...prev, msg]);
     });
 
-    ipcRenderer.on("fromPython", (event, msg) => {
-      setLogs((prev) => [...prev, msg.msg]);
+    ipcRenderer.on("fromPython", (event, data) => {
+      console.log("📥 Resposta do Python:", data);
     });
 
     return () => {
       ipcRenderer.removeAllListeners("fromPython");
     };
-
   }, []);
 
   return (
@@ -59,7 +67,9 @@ function Body() {
         </div>
         <ul className="areaLog">
           {logs.map((l, i) => (
-            <li className="textoLog" key={i}>{l}</li>
+            <li className="textoLog" key={i}>
+              {l}
+            </li>
           ))}
         </ul>
       </div>
@@ -80,7 +90,7 @@ function Body() {
               model={1}
               icone="☐ "
               button
-              onClick={() => window.electronAPI.sendMessage("parar-bot")}
+              onClick={para}
             />
           </div>
           <div>
